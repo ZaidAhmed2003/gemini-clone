@@ -1,43 +1,82 @@
-import React from "react";
+import React, { useState } from "react";
 import { assets } from "./../../assets/assets";
 
 const Sidebar = () => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsCollapsed(!isCollapsed);
+  };
+
   return (
-    <div className="h-screen inline-flex flex-col justify-between bg-[#f0f4f9] py-6.5 px-4">
-      <div className="">
-        <img
-          src={assets.menu_icon}
-          alt="menu"
-          className="w-5 block ml-2.5 cursor-pointer"
-        />
-        <div className="mt-3 inline-flex items-center gap-2.5 cursor-pointer py-2.5 px-4 bg-[#e6eaf1] rounded-[50px] text-sm text-gray-600">
-          <img src={assets.plus_icon} alt="" className="w-5" />
-          <p>New Chat</p>
+    <div
+      className={`h-screen ${
+        isCollapsed ? "w-16" : "w-64"
+      } bg-[#f0f4f9] flex flex-col justify-between transition-all duration-300 ease-in-out `}
+    >
+      {/* Top Section */}
+      <div className="pt-4">
+        {/* Menu Button */}
+        <div className={`flex justify-start px-5  mb-8`}>
+          <button onClick={toggleSidebar} className="cursor-pointer">
+            <img src={assets.menu_icon} alt="menu" className="w-5 " />
+          </button>
         </div>
-        <div className="">
-          <p className="">Recent</p>
-          <div className="">
-            <img src={assets.message_icon} alt="" className="w-5" />
-            <p>What is React?</p>
-          </div>
+
+        {/* New Chat */}
+        <div className="flex items-center gap-3 bg-[#e6eaf1] hover:bg-[#dce0e8] transition rounded-full mx-2 px-3 py-2 cursor-pointer">
+          <img src={assets.plus_icon} alt="new chat" className="w-5 " />
+          {!isCollapsed && (
+            <p className="text-sm text-gray-700 font-medium whitespace-nowrap">
+              New Chat
+            </p>
+          )}
+        </div>
+
+        {/* Recent */}
+        <div className="mt-8 px-2">
+          {!isCollapsed && (
+            <p className="text-gray-500 text-sm mb-4 font-semibold pl-2">
+              Recent
+            </p>
+          )}
+          <SidebarItem
+            icon={assets.message_icon}
+            label="What is React?"
+            collapsed={isCollapsed}
+          />
         </div>
       </div>
-      <div className="">
-        <div className="">
-          <img src={assets.question_icon} alt="" className="w-5" />
-          <p>Help</p>
-        </div>
-        <div className="">
-          <img src={assets.history_icon} alt="" className="w-5" />
-          <p>Activity</p>
-        </div>
-        <div className="">
-          <img src={assets.setting_icon} alt="" className="w-5" />
-          <p>Settings</p>
-        </div>
+
+      {/* Bottom Section */}
+      <div className="flex flex-col gap-1 px-2 pb-4">
+        <SidebarItem
+          icon={assets.question_icon}
+          label="Help"
+          collapsed={isCollapsed}
+        />
+        <SidebarItem
+          icon={assets.history_icon}
+          label="Activity"
+          collapsed={isCollapsed}
+        />
+        <SidebarItem
+          icon={assets.setting_icon}
+          label="Settings"
+          collapsed={isCollapsed}
+        />
       </div>
     </div>
   );
 };
+
+const SidebarItem = ({ icon, label, collapsed }) => (
+  <div className="flex items-center gap-3 hover:bg-[#e2e6eb] transition rounded-full px-3 py-2 cursor-pointer">
+    <img src={icon} alt={label} className="w-5" />
+    {!collapsed && (
+      <p className="text-sm text-gray-800 whitespace-nowrap">{label}</p>
+    )}
+  </div>
+);
 
 export default Sidebar;
