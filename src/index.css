@@ -6,3 +6,30 @@
   display: flex;
   font-family: "Outfit", sans-serif;
 }
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+pre {
+  background-color: #f4f4f4;
+  border-radius: 5px;
+  padding: 15px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow: auto;
+  font-family: "Courier New", Courier, monospace;
+  margin: 10px 0;
+}
+
+code {
+  display: block;
+  font-size: 16px;
+  color: #333;
+}

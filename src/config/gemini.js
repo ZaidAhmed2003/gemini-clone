@@ -1,13 +1,15 @@
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+const ai = new GoogleGenAI({
+  apiKey: "AIzaSyC24vjH6ZcbBgHgzTwepipNaH5XsT8C0Ks",
+});
 
-async function main() {
+async function runChat(prompt) {
   const response = await ai.models.generateContent({
     model: "gemini-2.0-flash",
-    contents: "Explain how AI works in a few words",
+    contents: prompt,
   });
-  console.log(response.text);
+  return response.text;
 }
 
-await main();
+export default runChat; 
