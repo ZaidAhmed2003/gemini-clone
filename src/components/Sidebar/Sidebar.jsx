@@ -3,7 +3,7 @@ import { assets } from "../../assets/assets";
 import { Context } from "../../context/Context";
 
 const Sidebar = () => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const { onSent, prevPrompts, setRecentPrompt } = useContext(Context);
 
   const toggleSidebar = () => {
